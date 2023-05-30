@@ -14,12 +14,14 @@ function App() {
       <Router>
         <ToastContainer transition={Flip} />
         <Routes>
-          <Route path="/login" Component={() => <Login />} />
-          <Route path="/password/forgot" Component={() => <ForgotPassword />} />
           <Route path="/" element={<RequireAuth />}>
+            <Route path="/login" Component={() => <Login />} />
+            <Route
+              path="/password/forgot"
+              Component={() => <ForgotPassword />}
+            />
             <Route path="" exact element={<Dashboard />} />
           </Route>
-          {/* <Route path="/" exact Component={() => <Dashboard />} /> */}
         </Routes>
       </Router>
     </>

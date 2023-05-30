@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
-import { loginValidationSchema } from "../schemas";
+import {
+  forgotPasswordValidationSchema,
+  loginValidationSchema,
+} from "../schemas";
 import { postLogin } from "../api/apiService";
 import jwtDecode from "jwt-decode";
 import { toast, Flip } from "react-toastify";
@@ -15,6 +18,8 @@ import {
   loggedInUser,
   loginFailure,
 } from "../features/login/loginSlice";
+import InputField from "../shared/InputField";
+import { emailProps, passwordProps } from "../shared/CONSTANT";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -66,7 +71,6 @@ const Login = () => {
   // };
 
   const handleLoginSubmit = async (values, action) => {
-    console.log("login submit==>", values);
     dispatch(login());
     try {
       const loggedIn = (await postLogin(values)).data;
@@ -91,14 +95,6 @@ const Login = () => {
       errorToast(
         error?.response?.data?.message || "Email and Password is Invalid."
       );
-      // toast(
-      //   error?.response?.data?.message || "Email and Password is Invalid.",
-      //   {
-      //     type: toast.TYPE.ERROR,
-      //     autoClose: 5000,
-      //     transition: Flip,
-      //   }
-      // );
     }
   };
 
@@ -109,6 +105,43 @@ const Login = () => {
       onSubmit: handleLoginSubmit,
     });
 
+  const inputs = [
+    {
+      ...emailProps,
+      isDivRequired: false,
+    },
+    {
+      ...passwordProps,
+      isDivRequired: true,
+      buttonOnClick: handleTogglePassword,
+      isShowButton: true,
+      showPassword: showPassword,
+    },
+  ];
+
+  const customInput = inputs.map((input) => (
+    <InputField
+      key={input?.name}
+      label={input?.label}
+      name={input?.name}
+      labelClassName="form_label"
+      type={input?.type}
+      value={values[input?.name]}
+      placeholder={input?.placeholder}
+      autoComplete={input?.autoComplete}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      isDivRequired={input?.isDivRequired}
+      divClassName={input?.divClassName}
+      buttonClassName={input?.buttonClassName}
+      buttonOnClick={input?.buttonOnClick}
+      errorMsg={errors[input.name]}
+      inputTouched={touched[input.name]}
+      isShowButton={input?.isShowButton}
+      showPassword={input?.showPassword}
+    />
+  ));
+
   return (
     <div className="login_page">
       <div className="login_div">
@@ -118,7 +151,8 @@ const Login = () => {
             Welcome back! Please login in to access your <br /> account.
           </p>
           <form onSubmit={handleSubmit}>
-            <label className="form_label" htmlFor="email">
+            {customInput}
+            {/* <label className="form_label" htmlFor="email">
               Email Address*
             </label>
             <input
@@ -157,10 +191,10 @@ const Login = () => {
               >
                 {showPassword ? "Hide" : "Show"}
               </button>
-              {errors.password && touched.password && (
-                <div className="form-error">{errors.password}</div>
-              )}
             </div>
+            {errors.password && touched.password && (
+              <div className="form-error">{errors.password}</div>
+            )} */}
             <div className="wrap_forgot_password">
               <div className="remember">
                 <label htmlFor="rememberme">

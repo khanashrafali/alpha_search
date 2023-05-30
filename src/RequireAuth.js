@@ -8,16 +8,22 @@ const RequireAuth = () => {
   );
   const currentTime = Math.floor(new Date().getTime() / 1000);
 
-  console.log({ expiry, currentTime });
-
   let message = "";
 
   if (expiry && currentTime > expiry) {
     localStorage.clear();
     localStorage.setItem("message", "Token Expired");
   }
-  if (message || !token) {
+  if (message || (!token && location.pathname !== "/login")) {
     return <Navigate to="/login" state={{ from: location, message }} replace />;
+  }
+  if (
+    (location.pathname === "/login" ||
+      location.pathname === "/password/forgot") &&
+    token &&
+    currentTime <= expiry
+  ) {
+    return <Navigate to="/" replace />;
   }
   return <Outlet />;
 };

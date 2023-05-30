@@ -11,6 +11,8 @@ import {
 } from "../features/forgotPassword/forgotPasswordSlice";
 import { toast, Flip } from "react-toastify";
 import { successToast, errorToast } from "../services/toastService";
+import { emailProps } from "../shared/CONSTANT";
+import InputField from "../shared/InputField";
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
@@ -29,7 +31,6 @@ const ForgotPassword = () => {
     } catch (error) {
       dispatch(forgotPasswordFailure());
       errorToast(error?.response?.data?.msg);
-      console.log({ error });
     }
   };
 
@@ -40,6 +41,36 @@ const ForgotPassword = () => {
       onSubmit: handleForgotPasswordSubmit,
     });
 
+  const inputs = [
+    {
+      ...emailProps,
+      isDivRequired: false,
+    },
+  ];
+
+  const customInput = inputs.map((input) => (
+    <InputField
+      key={input?.name}
+      label={input?.label}
+      name={input?.name}
+      type={input?.type}
+      labelClassName="form_label"
+      value={values[input?.name]}
+      placeholder={input?.placeholder}
+      autoComplete={input?.autoComplete}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      isDivRequired={input?.isDivRequired}
+      divClassName={input?.divClassName}
+      buttonClassName={input?.buttonClassName}
+      buttonOnClick={input?.buttonOnClick}
+      errorMsg={errors[input?.name]}
+      inputTouched={touched[input?.name]}
+      isShowButton={input?.isShowButton}
+      showPassword={input?.showPassword}
+    />
+  ));
+
   return (
     <div className="forgot_page">
       <div className="forgot_div">
@@ -49,7 +80,8 @@ const ForgotPassword = () => {
             Enter your email and we'll send you a link to reset your password.
           </p>
           <form onSubmit={handleSubmit}>
-            <label className="form_label" htmlFor="email">
+            {customInput}
+            {/* <label className="form_label" htmlFor="email">
               Email address*
             </label>
             <input
@@ -64,7 +96,7 @@ const ForgotPassword = () => {
             />
             {errors.email && touched.email && (
               <div className="form-error">{errors.email}</div>
-            )}
+            )} */}
             <button className="forgot-button" type="submit">
               Send link
             </button>

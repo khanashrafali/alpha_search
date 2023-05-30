@@ -26,6 +26,7 @@ body {
 @media screen and (max-width: 1200px) {
   .login_page {
     height: 100vh;
+    margin: 5px;
   }
   .alpha_search {
     display: none;
@@ -81,7 +82,7 @@ form {
   font-size: 16px;
   line-height: 20px;
   color: #58595b;
-  margin-bottom: 14px;
+  margin: 15px 0 14px;
 }
 
 input[type="email"],
@@ -112,7 +113,7 @@ input[type="text"] {
 
 .password .toggle_button {
   position: absolute;
-  top: 35%;
+  top: 40%;
   right: 10px;
   transform: translateY(-35%);
   background: none;
@@ -136,11 +137,14 @@ input[type="text"] {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-bottom: 50px;
+  margin: 10px 0 50px;
 }
 
 .remember label {
-  font-size: 20px;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 .remember input[type="checkbox"] {
   margin-right: 10px;
@@ -158,7 +162,7 @@ input[type="text"] {
 }
 
 .login-button {
-  margin-top: 50px;
+  margin-top: 35px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -238,8 +242,8 @@ input[type="text"] {
 
 .form-error {
   /* margin-top: -15px; */
-  margin-bottom: 10px;
-  font-size: 1rem;
+  margin-top: 5px;
+  font-size: 0.9rem;
   color: #b22b27;
   display: flex;
   justify-content: flex-start;
@@ -270,6 +274,7 @@ input[type="text"] {
 @media screen and (max-width: 1200px) {
   .forgot_page {
     height: 100vh;
+    margin: 5px;
   }
   /* .alpha_search {
     display: none;
@@ -312,7 +317,7 @@ input[type="text"] {
 }
 
 .forgot-button {
-  margin-top: 15px;
+  margin-top: 35px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
