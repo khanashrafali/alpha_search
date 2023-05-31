@@ -14,7 +14,12 @@ const RequireAuth = () => {
     localStorage.clear();
     localStorage.setItem("message", "Token Expired");
   }
-  if (message || (!token && location.pathname !== "/login")) {
+  if (
+    message ||
+    (!token &&
+      location.pathname !== "/login" &&
+      location.pathname !== "/password/forgot")
+  ) {
     return <Navigate to="/login" state={{ from: location, message }} replace />;
   }
   if (

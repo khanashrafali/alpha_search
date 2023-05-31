@@ -29,6 +29,9 @@ const InputField = ({
             type={type === "password" && showPassword ? "text" : type}
             name={name}
             {...props}
+            style={{
+              borderColor: errorMsg && inputTouched ? "red" : "initial",
+            }}
           />
           {isShowButton && (
             <button
@@ -41,7 +44,15 @@ const InputField = ({
           )}
         </div>
       ) : (
-        <input id={name} type={type} name={name} {...props} />
+        <input
+          id={name}
+          type={type}
+          name={name}
+          {...props}
+          style={{
+            borderColor: errorMsg && inputTouched ? "red" : "initial",
+          }}
+        />
       )}
       <ValidationError errorMsg={errorMsg} inputTouched={inputTouched} />
     </>

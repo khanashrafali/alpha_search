@@ -48,7 +48,7 @@ const ForgotPassword = () => {
     },
   ];
 
-  const customInput = inputs.map((input) => (
+  const customInput = inputs?.map((input) => (
     <InputField
       key={input?.name}
       label={input?.label}
