@@ -16,6 +16,7 @@ const Header = () => {
         backgroundColor: "#f1f1f1",
         boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.1)",
         padding: "10px 20px",
+        position: "inherit",
       }}
     >
       <Container maxWidth="xl">
